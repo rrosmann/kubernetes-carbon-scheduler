@@ -1,0 +1,452 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 29,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 7,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 2,
+            "pointSize": 7,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "area"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "yellow",
+                "value": 200
+              },
+              {
+                "color": "red",
+                "value": 400
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{__name__=\"carbon_intensity_gco2\", endpoint=\"metrics\", instance=\"192.168.0.71:8000\", job=\"carbon-exporter\", namespace=\"monitoring\", region=\"region-asia-east\", service=\"carbon-exporter\"}"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "displayName",
+                "value": "region-asia-east"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{__name__=\"carbon_intensity_gco2\", endpoint=\"metrics\", instance=\"192.168.0.71:8000\", job=\"carbon-exporter\", namespace=\"monitoring\", region=\"region-eu-west\", service=\"carbon-exporter\"}"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#0c0ef2",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "displayName",
+                "value": "region-eu-west"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "{__name__=\"carbon_intensity_gco2\", endpoint=\"metrics\", instance=\"192.168.0.71:8000\", job=\"carbon-exporter\", namespace=\"monitoring\", region=\"region-us-east\", service=\"carbon-exporter\"}"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "blue",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "displayName",
+                "value": "region-us-east"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "interval": "15",
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "builder",
+          "expr": "carbon_intensity_gco2",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Carbon Level in Region",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 2,
+            "pointSize": 7,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "decimals": 0,
+          "mappings": [],
+          "max": 4,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "region-asia-east"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-purple",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "region-eu-west"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#0c1af2",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 2,
+      "interval": "5s",
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "label_replace(\n  sum by (namespace) (kube_pod_status_phase{namespace=~\"region-.*\", phase=\"Running\", pod=~\"sim-.*\"}),\n  \"namespace\", \"$1\", \"namespace\", \"(.*)\"\n)\nor \nlabel_replace(vector(0), \"namespace\", \"region-eu-west\", \"\", \"\")\nor \nlabel_replace(vector(0), \"namespace\", \"region-us-east\", \"\", \"\")\nor \nlabel_replace(vector(0), \"namespace\", \"region-asia-east\", \"\", \"\")",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "{{label_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Pods per Region",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 17,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineWidth": 2,
+            "pointSize": 9,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "# EUROPE PART\n(\n  (\n    (sum(kube_pod_status_phase{namespace=\"region-eu-west\", phase=\"Running\", pod=~\"sim-app-.*\"}) or vector(0)) * 0.20 +\n    (sum(kube_pod_status_phase{namespace=\"region-eu-west\", phase=\"Running\", pod=~\"sim-job-.*\"}) or vector(0)) * 0.15 +\n    (sum(kube_pod_status_phase{namespace=\"region-eu-west\", phase=\"Running\", pod=~\"sim-burst-.*\"}) or vector(0)) * 0.30\n  )\n  * scalar(sum(carbon_intensity_gco2{region=\"region-eu-west\"}) or vector(0))\n)\n+\n# USA PART\n(\n  (\n    (sum(kube_pod_status_phase{namespace=\"region-us-east\", phase=\"Running\", pod=~\"sim-app-.*\"}) or vector(0)) * 0.20 +\n    (sum(kube_pod_status_phase{namespace=\"region-us-east\", phase=\"Running\", pod=~\"sim-job-.*\"}) or vector(0)) * 0.15 +\n    (sum(kube_pod_status_phase{namespace=\"region-us-east\", phase=\"Running\", pod=~\"sim-burst-.*\"}) or vector(0)) * 0.30\n  )\n  * scalar(sum(carbon_intensity_gco2{region=\"region-us-east\"}) or vector(0))\n)\n+\n# ASIA PART\n(\n  (\n    (sum(kube_pod_status_phase{namespace=\"region-asia-east\", phase=\"Running\", pod=~\"sim-app-.*\"}) or vector(0)) * 0.20 +\n    (sum(kube_pod_status_phase{namespace=\"region-asia-east\", phase=\"Running\", pod=~\"sim-job-.*\"}) or vector(0)) * 0.15 +\n    (sum(kube_pod_status_phase{namespace=\"region-asia-east\", phase=\"Running\", pod=~\"sim-burst-.*\"}) or vector(0)) * 0.30\n  )\n  * scalar(sum(carbon_intensity_gco2{region=\"region-asia-east\"}) or vector(0))\n)"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "displayName",
+                "value": "Emissions"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 3,
+      "interval": "15",
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "# EUROPE PART\n(\n  (\n    (sum(kube_pod_status_phase{namespace=\"region-eu-west\", phase=\"Running\", pod=~\"sim-app-.*\"}) or vector(0)) * 0.20 +\n    (sum(kube_pod_status_phase{namespace=\"region-eu-west\", phase=\"Running\", pod=~\"sim-job-.*\"}) or vector(0)) * 0.15 +\n    (sum(kube_pod_status_phase{namespace=\"region-eu-west\", phase=\"Running\", pod=~\"sim-burst-.*\"}) or vector(0)) * 0.30\n  )\n  * scalar(sum(carbon_intensity_gco2{region=\"region-eu-west\"}) or vector(0))\n)\n+\n# USA PART\n(\n  (\n    (sum(kube_pod_status_phase{namespace=\"region-us-east\", phase=\"Running\", pod=~\"sim-app-.*\"}) or vector(0)) * 0.20 +\n    (sum(kube_pod_status_phase{namespace=\"region-us-east\", phase=\"Running\", pod=~\"sim-job-.*\"}) or vector(0)) * 0.15 +\n    (sum(kube_pod_status_phase{namespace=\"region-us-east\", phase=\"Running\", pod=~\"sim-burst-.*\"}) or vector(0)) * 0.30\n  )\n  * scalar(sum(carbon_intensity_gco2{region=\"region-us-east\"}) or vector(0))\n)\n+\n# ASIA PART\n(\n  (\n    (sum(kube_pod_status_phase{namespace=\"region-asia-east\", phase=\"Running\", pod=~\"sim-app-.*\"}) or vector(0)) * 0.20 +\n    (sum(kube_pod_status_phase{namespace=\"region-asia-east\", phase=\"Running\", pod=~\"sim-job-.*\"}) or vector(0)) * 0.15 +\n    (sum(kube_pod_status_phase{namespace=\"region-asia-east\", phase=\"Running\", pod=~\"sim-burst-.*\"}) or vector(0)) * 0.30\n  )\n  * scalar(sum(carbon_intensity_gco2{region=\"region-asia-east\"}) or vector(0))\n)",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Sum of Emissions",
+      "type": "timeseries"
+    }
+  ],
+  "preload": false,
+  "refresh": "10s",
+  "schemaVersion": 42,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Carbon Dashboard",
+  "uid": "adz6z2h",
+  "version": 9
+}

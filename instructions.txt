@@ -1,0 +1,97 @@
+sudo usermod -aG docker $USER
+newgrp docker
+
+minikube start
+
+
+kubectl config use-context minikube
+kubectl config current-context
+
+
+vcluster create region-us-east --namespace region-us-east
+vcluster create region-eu-west --namespace region-eu-west
+vcluster create region-asia-east --namespace region-asia-east
+
+vcluster connect region-us-east --namespace region-us-east
+vcluster connect region-eu-west --namespace region-eu-west
+vcluster connect region-asia-east --namespace region-asia-east
+
+kubectl get namespaces
+
+# 2. Install the monitoring stack
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install monitoring prometheus-community/kube-prometheus-stack --namespace monitoring --create-namespace
+kubectl apply -f external-exporter.yaml
+
+python3 -m venv csnenv
+source csnenv/bin/activate
+pip install kubernetes prometheus-client prometheus-api-client
+
+python3 ./carbon-label.py
+
+kubectl port-forward svc/monitoring-kube-prometheus-prometheus -n monitoring 9090:9090
+http://localhost:9090/query
+
+kubectl port-forward deployment/monitoring-grafana -n monitoring 3000:3000
+http://localhost:3000/?orgId=1&from=now-6h&to=now&timezone=browser
+
+# Check if namespaces still have their labels
+kubectl get ns --show-labels
+
+# Check if the exporter service is alive
+kubectl get svc -n monitoring carbon-exporter
+
+
+sudo usermod -aG docker $USER
+newgrp docker
+vcluster connect region-asia-east -n region-asia-east --print > ./kubeconfig.asia-east
+watch -n 1 "KUBECONFIG=./kubeconfig.asia-east kubectl get pods"
+
+vcluster connect region-us-east -n region-us-east --print > ./kubeconfig.us-east
+watch -n 1 "KUBECONFIG=./kubeconfig.us-east kubectl get pods"
+
+vcluster connect region-eu-west -n region-eu-west --print > ./kubeconfig.eu-west
+watch -n 1 "KUBECONFIG=./kubeconfig.eu-west kubectl get pods"
+
+watch -n 1 "kubectl --context=minikube get pods -n default | grep 'sim-'"
+
+---------------------||---------------------
+
+helm install monitoring prometheus-community/kube-prometheus-stack --namespace monitoring --create-namespace:
+NOTES:
+kube-prometheus-stack has been installed. Check its status by running:
+  kubectl --namespace monitoring get pods -l "release=monitoring"
+
+Get Grafana 'admin' user password by running:
+
+  kubectl --namespace monitoring get secrets monitoring-grafana -o jsonpath="{.data.admin-password}" | base64 -d ; echo
+
+Access Grafana local instance:
+
+  export POD_NAME=$(kubectl --namespace monitoring get pod -l "app.kubernetes.io/name=grafana,app.kubernetes.io/instance=monitoring" -oname)
+  kubectl --namespace monitoring port-forward $POD_NAME 3000
+
+Get your grafana admin user password by running:
+
+  kubectl get secret --namespace monitoring -l app.kubernetes.io/component=admin-secret -o jsonpath="{.items[0].data.admin-password}" | base64 --decode ; echo
+
+
+Visit https://github.com/prometheus-operator/kube-prometheus for instructions on how to create & configure Alertmanager and Prometheus instances using the Operator.
+
+---------------------||---------------------
+
+hostname -I
+
+---------------------||---------------------
+
+kubectl get pods -A
+kubectl delete pods --all -n default
+kubectl delete pods -l priority -A
+
+kubectl label ns region-eu-west status=Down --overwrite
+kubectl label ns region-eu-west status=Active --overwrite
+
+kubectl get pods -n monitoring -w
+kubectl delete pod -l app.kubernetes.io/name=prometheus -n monitoring
+

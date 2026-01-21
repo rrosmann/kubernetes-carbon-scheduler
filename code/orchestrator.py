@@ -123,7 +123,7 @@ def reconcile():
           if migrate_pod(pod, loc, HOME_REGION):
             regions = get_global_status()
 
-      #medium 
+      # medium
       regions = get_global_status()
       host_pods = v1_host.list_namespaced_pod("default").items
       med_workloads = []
@@ -150,7 +150,7 @@ def reconcile():
                 regions = get_global_status()
                 break
 
-      #low
+      # low
       regions = get_global_status()
       low_workloads = []
       for r_name, r_info in regions.items():

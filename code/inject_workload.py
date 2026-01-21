@@ -30,7 +30,8 @@ def inject(name, priority, app_type):
 
   try:
     v1.create_namespaced_pod(namespace="default", body=pod_manifest)
-    print(f"[STARTING] Injected {name} | Priority: {priority} | App: {app_type}")
+    print(
+      f"[STARTING] Injected {name} | Priority: {priority} | App: {app_type}")
   except Exception as e:
     print(f"[ERROR] Failed to inject {name}: {e}")
 

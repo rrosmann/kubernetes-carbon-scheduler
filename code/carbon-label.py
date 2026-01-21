@@ -51,7 +51,7 @@ def update_metrics_loop():
 
 def k8s_labeler_loop():
   step = 0
-  while True:
+  while step <= 71:
     total_minutes = step * 20
     sim_hours = (total_minutes // 60) % 24
     sim_mins = total_minutes % 60

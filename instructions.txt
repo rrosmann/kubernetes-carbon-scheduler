@@ -34,7 +34,7 @@ kubectl port-forward svc/monitoring-kube-prometheus-prometheus -n monitoring 909
 http://localhost:9090/query
 
 kubectl port-forward deployment/monitoring-grafana -n monitoring 3000:3000
-http://localhost:3000/?orgId=1&from=now-6h&to=now&timezone=browser
+http://localhost:3000/d/adz6z2h/carbon-dashboard?orgId=1&from=now-30m&to=now&timezone=browser&refresh=auto
 
 # Check if namespaces still have their labels
 kubectl get ns --show-labels
@@ -48,11 +48,11 @@ newgrp docker
 vcluster connect region-asia-east -n region-asia-east --print > ./kubeconfig.asia-east
 watch -n 1 "KUBECONFIG=./kubeconfig.asia-east kubectl get pods"
 
-vcluster connect region-us-east -n region-us-east --print > ./kubeconfig.us-east
-watch -n 1 "KUBECONFIG=./kubeconfig.us-east kubectl get pods"
-
 vcluster connect region-eu-west -n region-eu-west --print > ./kubeconfig.eu-west
 watch -n 1 "KUBECONFIG=./kubeconfig.eu-west kubectl get pods"
+
+vcluster connect region-us-east -n region-us-east --print > ./kubeconfig.us-east
+watch -n 1 "KUBECONFIG=./kubeconfig.us-east kubectl get pods"
 
 watch -n 1 "kubectl --context=minikube get pods -n default | grep 'sim-'"
 
@@ -95,3 +95,6 @@ kubectl label ns region-eu-west status=Active --overwrite
 kubectl get pods -n monitoring -w
 kubectl delete pod -l app.kubernetes.io/name=prometheus -n monitoring
 
+vcluster connect region-eu-west -n region-eu-west --local-port 12181
+vcluster connect region-us-east -n region-us-east --local-port 12749
+vcluster connect region-asia-east -n region-asia-east --local-port 10848
